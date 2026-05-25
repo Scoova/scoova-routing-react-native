@@ -3,6 +3,9 @@
 All notable changes to `@scoova/routing-react-native` are recorded here.
 This project follows [Semantic Versioning](https://semver.org/).
 
+## 1.2.0 — 2026-05-25
+- Internal: tag-triggered CI publishing wired up; this is the first release built and pushed by GitHub Actions. No public API changes from 1.1.x.
+
 ## 1.1.1 — 2026-05-25
 - Default `baseUrl` switched from the retired `https://routing.scoo-va.info` subdomain to the central gateway at `https://api.scoo-va.info/api/v1/routing`. Callers who explicitly set `baseUrl` are unaffected. The old subdomain returns `ENDPOINT_RETIRED`.
 

@@ -1,0 +1,47 @@
+name: Publish to npm
+
+# Tag-triggered publish to npm for @scoova/routing-react-native using
+# npm's trusted-publisher (OIDC) flow — no NPM_TOKEN secret required.
+#
+# One-time setup at:
+#   https://www.npmjs.com/package/@scoova/routing-react-native/access
+#     → Trusted publishers → Add GitHub Actions
+#         repo:        Scoova/scoova-routing-react-native
+#         workflow:    .github/workflows/publish.yml
+#         environment: (blank)
+#
+# With id-token:write granted, `npm publish --provenance` auto-detects
+# the OIDC token via ACTIONS_ID_TOKEN_REQUEST_* and ships a signed SLSA
+# attestation that links the publish to this commit + workflow run.
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    name: npm publish @scoova/routing-react-native
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org/'
+      - name: Install
+        run: npm install
+      - name: Typecheck
+        # The RN package is pure TS — verify it still compiles cleanly
+        # before publishing. No build step (consumers compile in their
+        # own Metro/Babel pipeline) so this is the only safety net.
+        run: |
+          npx tsc --noEmit \
+            --target es2020 --module commonjs --jsx react-native \
+            --skipLibCheck --esModuleInterop --moduleResolution node \
+            src/index.ts
+      - name: Publish
+        run: npm publish --access public --provenance
