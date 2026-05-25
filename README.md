@@ -1,7 +1,7 @@
 # @scoova/routing-react-native
 
 React Native build of `@scoova/routing` — pure TypeScript, no native modules
-required. Standalone Valhalla routing client for `routing.scoo-va.info`.
+required. Routing client for `routing.scoo-va.info`.
 
 ```sh
 npm install @scoova/routing-react-native

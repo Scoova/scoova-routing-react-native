@@ -1,5 +1,5 @@
 /**
- * @scoova/routing-react-native — Valhalla wrapper for the Scoova routing
+ * @scoova/routing-react-native — Client for the Scoova routing
  * gateway (`api.scoo-va.info/api/v1/routing`).
  *
  * Pure TypeScript, no native modules. Eight endpoints: route, optimizedRoute,
@@ -275,7 +275,7 @@ export class RoutingClient {
   }
 }
 
-/** Decode a Valhalla polyline6 string into `{lat, lon}` points. */
+/** Decode a polyline (precision 6, Google-format) string into `{lat, lon}` points. */
 export function decodePolyline(encoded: string, precision = 6): LatLng[] {
   const coords: LatLng[] = [];
   const factor = 10 ** precision;
