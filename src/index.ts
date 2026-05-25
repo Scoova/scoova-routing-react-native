@@ -1,5 +1,6 @@
 /**
- * @scoova/routing-react-native — Valhalla wrapper for `routing.scoo-va.info`.
+ * @scoova/routing-react-native — Valhalla wrapper for the Scoova routing
+ * gateway (`api.scoo-va.info/api/v1/routing`).
  *
  * Pure TypeScript, no native modules. Eight endpoints: route, optimizedRoute,
  * isochrone, matrix, height (alias `elevation`), mapMatch, locate, status.
@@ -51,7 +52,7 @@ export interface IsochroneOptions {
 
 /**
  * Server-rendered phrasing bundle attached to each maneuver. Emitted by
- * `routing.scoo-va.info/route` so clients render `banner.verb` + `banner.anchor`
+ * the routing gateway's `/route` so clients render `banner.verb` + `banner.anchor`
  * verbatim and play `voice.headsUp` / `voice.getReadyTemplate` / `voice.atLandmark`
  * without paraphrasing. All fields optional / nullable for forward-compat.
  */
@@ -143,7 +144,7 @@ export class RoutingError extends Error {
   }
 }
 
-const DEFAULT_BASE = 'https://routing.scoo-va.info';
+const DEFAULT_BASE = 'https://api.scoo-va.info/api/v1/routing';
 const DEFAULT_LOCALE = 'en';
 
 export interface ClientOptions {
